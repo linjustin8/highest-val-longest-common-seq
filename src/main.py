@@ -3,6 +3,9 @@
 import os
 import shutil
 import sys
+import time
+
+from max_val_subsequence import max_val
 
 
 def main():
@@ -18,7 +21,7 @@ def main():
     s1 = "" # (A): first string
     s2 = "" # (B): second string
 
-
+    # read input file and populate variables
     with(open(file, "r") as f):
         num_chars = int(f.readline().strip())
         for _ in range(num_chars):
@@ -29,10 +32,25 @@ def main():
         s1 = f.readline().strip()
         s2 = f.readline().strip()
     
+    # excute and calculate time taken
+    start_time = time.time()
     
+    res, sequence = max_val(s1, s2, val_of_letter)
     
+    end_time = time.time()
+    print(f"Result: {res}")
+    print(f"Sequence: {sequence}") 
+    print(f"Time taken: {end_time - start_time} seconds")
     
-
+    # create output file and write result to it
+    input_name = os.path.basename(file)
+    output_name = f"{os.path.splitext(input_name)[0]}.out"
+    output_file = os.path.join(output_directory, output_name)
+    with open(output_file, "w") as f:
+        f.write(str(res))
+        f.write("\n")
+        f.write(sequence)
+        
 
 if __name__ == "__main__":
     main()
