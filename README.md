@@ -48,4 +48,48 @@ The recurrence is correct because it considers all the possible optimal subseque
 
 
 ### Question 3:
+The runtime of the algorithm is also going to be O(nm)
 
+```
+def length(String A, String B, Map v):
+    n = length(A)
+    m = length(B)
+
+    create Val[0...n][0...m]
+    create Len[0...n][0...m]
+
+    for i = 0 to n:
+        Val[i][0] = 0
+        Len[i][0] = 0
+
+    for j = 0 to m:
+        Val[0][j] = 0
+        Len[0][j] = 0
+
+    for i = 1 to n:
+        for j = 1 to m:
+
+            bestValue = -1
+            bestLength = -1
+
+            if Val[i-1][j] > bestValue or (Val[i-1][j] == bestValue and Len[i-1][j] > bestLength):
+                bestValue = Val[i-1][j]
+                bestLength = Len[i-1][j]
+
+            if Val[i][j-1] > bestValue or (Val[i][j-1] == bestValue and Len[i][j-1] > bestLength):
+                bestValue = Val[i][j-1]
+                bestLength = Len[i][j-1]
+
+            if A[i] == B[j]:
+                val = Val[i-1][j-1] + v(A[i])
+                length = Len[i-1][j-1] + 1
+
+                if val > bestValue or (val == bestValue and length > bestLength):
+                    bestValue = val
+                    bestLength = length
+
+            Val[i][j] = bestValue
+            Len[i][j] = bestLength
+
+    return Len[n][m]
+```
