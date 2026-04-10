@@ -38,6 +38,13 @@ The program assumes the following:
 Since all the test cases used were roughly identical in lengths of their respective A's and B's, this should show us a quadratic growth as the time complexity of the dynamic programming algorithm comes out to O(nm) 
 
 ### Question 2:
+#### Base Cases:
+OPT(0, j) = 0; OPT(i, 0) = 0
+
+#### Recurrence Equation:
+![alt text](./data/reccurence_equation.png)
+
+The recurrence is correct because it considers all the possible optimal subsequences by either skipping a character from one of the strings or matching the last chacters if they're equal. Each case would reduce the larger problem into a smaller subproblem to then take the maximum for the maximized solution.
 
 
 ### Question 3:
